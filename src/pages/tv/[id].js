@@ -11,6 +11,7 @@ export default function detail({ data, video }) {
           <Image
             src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`}
             fill="cover"
+            alt={data.original_name}
           />
         </div>
         <div>
