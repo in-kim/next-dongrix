@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 export default function detail({ data, video }) {
+  console.log("##", video);
+
   function ratingToPercentage(score) {
     return (Number(score) / 10) * 100;
   }
@@ -32,7 +34,17 @@ export default function detail({ data, video }) {
           <p>{data.overview}</p>
         </div>
       </div>
-
+      <div className="video__wrapper">
+        {video.results.length > 0 ? (
+          video.results.map((item) => (
+            <div key={item.key}>
+              <iframe src={`https://www.youtube.com/embed/${item.key}`} />
+            </div>
+          ))
+        ) : (
+          <div>youtube 비디오가 없습니다.</div>
+        )}
+      </div>
       <style jsx>{`
         .container {
           display: flex;
@@ -83,6 +95,16 @@ export default function detail({ data, video }) {
           flex: 0 0 200px;
           height: 300px;
           background: url("/noPoster.png") no-repeat center center;
+        }
+
+        .video__wrapper {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+          flex-wrap: no-wrap;
+          overflow-x: auto;
+          padding-bottom: 20px;
+          margin: 0 20px;
         }
       `}</style>
     </>

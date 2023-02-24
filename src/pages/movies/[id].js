@@ -4,6 +4,7 @@ export default function detail({ data, video }) {
   function ratingToPercentage(score) {
     return (Number(score) / 10) * 100;
   }
+
   return (
     <>
       <div className="container">
@@ -32,7 +33,17 @@ export default function detail({ data, video }) {
           <p>{data.overview}</p>
         </div>
       </div>
-
+      <div className="video__wrapper">
+        {video.results.length ? (
+          video.results.map((item) => (
+            <div key={item.key}>
+              <iframe src={`https://www.youtube.com/embed/${item.key}`} />
+            </div>
+          ))
+        ) : (
+          <div>youtube 비디오가 없습니다.</div>
+        )}
+      </div>
       <style jsx>{`
         .container {
           display: flex;
@@ -84,6 +95,16 @@ export default function detail({ data, video }) {
           height: 300px;
           background: url("/noPoster.png") no-repeat center center / cover;
         }
+
+        .video__wrapper {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+          flex-wrap: no-wrap;
+          overflow-x: auto;
+          padding-bottom: 20px;
+          margin: 0 20px;
+        }
       `}</style>
     </>
   );
@@ -94,6 +115,7 @@ export async function getServerSideProps({ query: { id } }) {
 
   const movie = await res.json();
   const video = await res2.json();
+
   return {
     props: {
       data: movie,

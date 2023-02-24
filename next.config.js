@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         source: "/api/movie/:id/videos",
-        destination: `https://api.themoviedb.org/3/movie/:id?api_key=${API_KEY}/videos`,
+        destination: `https://api.themoviedb.org/3/movie/:id/videos?api_key=${API_KEY}`,
       },
       {
         source: "/api/tv",
@@ -26,7 +26,11 @@ const nextConfig = {
       },
       {
         source: "/api/tv/:id/videos",
-        destination: `https://api.themoviedb.org/3/tv/:id?api_key=${API_KEY}/videos`,
+        destination: `https://api.themoviedb.org/3/tv/:id/videos?api_key=${API_KEY}`,
+      },
+      {
+        source: "/api/video/:key",
+        destination: `https://www.youtube.com/embed/:key`,
       },
     ];
   },
