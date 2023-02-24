@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function detail({ data, video }) {
   function ratingToPercentage(score) {
     return (Number(score) / 10) * 100;
@@ -5,7 +7,12 @@ export default function detail({ data, video }) {
   return (
     <>
       <div className="container">
-        <img src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`} />
+        <div className="img__wrapper">
+          <Image
+            src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`}
+            fill="cover"
+          />
+        </div>
         <div>
           <h3>{data.title}</h3>
           <div className="d-flex gap-10 font-10">
@@ -68,6 +75,13 @@ export default function detail({ data, video }) {
           width: 61px;
           height: 12px;
           background: url("/star_active.svg") repeat-x;
+        }
+
+        .img__wrapper {
+          position: relative;
+          flex: 0 0 200px;
+          height: 300px;
+          background: url("/noPoster.png") no-repeat center center / cover;
         }
       `}</style>
     </>

@@ -4,15 +4,31 @@ import { useRouter } from "next/router";
 
 export default function Nav() {
   const router = useRouter();
+  console.log(router.pathname.split("/"));
   return (
     <nav>
       <Image src="/logo.png" alt="logo" width={200} height={100} />
       <div>
         <Link href="/" legacyBehavior>
-          <a className={router.pathname === "/" ? "active" : ""}>Movie</a>
+          <a
+            className={
+              router.pathname === "/" ||
+              router.pathname.split("/").includes("movies")
+                ? "active"
+                : ""
+            }
+          >
+            Movie
+          </a>
         </Link>
         <Link href="/tv" legacyBehavior>
-          <a className={router.pathname === "/tv" ? "active" : ""}>TV</a>
+          <a
+            className={
+              router.pathname.split("/").includes("tv") ? "active" : ""
+            }
+          >
+            TV
+          </a>
         </Link>
       </div>
       <style jsx>{`
